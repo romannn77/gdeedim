@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b1d33" />
+  <meta name="description" content="ГдеЕдим? — кофейни и коворкинг Солнцева, Ново-Переделкина и рядом." />
+  <title>ГдеЕдим?</title>
+  <link rel="manifest" href="/manifest.webmanifest" crossorigin="use-credentials">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="ГдеЕдим?">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <script defer src="/pwa.js"></script>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%230b1d33'/%3E%3Cpath d='M32 12c-9.4 0-17 7.6-17 17 0 12.4 17 25 17 25s17-12.6 17-25c0-9.4-7.6-17-17-17Z' fill='%2334d17f'/%3E%3Ccircle cx='32' cy='29' r='7' fill='%230b1d33'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.css" />
+  <script defer src="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js" onload="window.initRealMap?.()" onerror="window.mapLoadFailed?.()"></script>
+  <style>
+    :root{--navy:#0b1d33;--navy2:#132b49;--green:#34d17f;--green2:#17ab60;--yellow:#f2c94c;--red:#ff5d6c;--bg:#f3f6f8;--card:#fff;--ink:#12243a;--muted:#65758a;--line:#d9e2e8;--shadow:0 18px 44px rgba(15,35,57,.12)}
+    *{box-sizing:border-box} html{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg)} body{margin:0;min-height:100vh} button,input,select{font:inherit} button{cursor:pointer}
+    .app{min-height:100vh}.topbar{height:72px;background:var(--navy);color:#fff;display:flex;align-items:center;gap:24px;padding:0 32px;position:sticky;top:0;z-index:20;box-shadow:0 8px 24px rgba(9,25,43,.18)}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:850;letter-spacing:.01em;white-space:nowrap}.brand-mark{width:36px;height:36px;border-radius:12px;background:var(--green);display:grid;place-items:center;color:var(--navy);font-size:20px}.brand small{display:block;color:#aebfd0;font-weight:500;font-size:12px;margin-top:1px}
+    .tabs{margin-left:auto;display:flex;background:#183451;border-radius:14px;padding:4px;gap:4px}.tab{border:0;background:transparent;color:#bed0df;border-radius:10px;padding:10px 16px;font-weight:750}.tab.active{background:#fff;color:var(--navy)}
+    .live{display:flex;align-items:center;gap:8px;color:#cfe1ee;font-size:14px}.live-dot{width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 0 5px rgba(52,209,127,.15)}
+    main{max-width:1480px;margin:auto;padding:24px 28px 36px}.heading-row{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:18px}.heading-row h1{font-size:clamp(26px,3vw,42px);line-height:1.05;margin:0}.heading-row p{margin:7px 0 0;color:var(--muted);font-size:16px}.time-pill{background:#e6f8ef;color:#117747;border:1px solid #bdebd2;border-radius:999px;padding:9px 14px;font-weight:700;white-space:nowrap}
+    .filters{display:grid;grid-template-columns:minmax(210px,1.3fr) repeat(3,minmax(125px,.7fr)) auto;gap:10px;margin-bottom:16px}.field{background:#fff;border:1px solid var(--line);border-radius:14px;padding:9px 13px;display:flex;flex-direction:column;gap:3px}.field label{font-size:12px;color:var(--muted);font-weight:700}.field select,.field input{border:0;outline:0;background:transparent;color:var(--ink);font-weight:700;width:100%}.primary{border:0;border-radius:14px;background:var(--green);color:var(--navy);font-weight:850;padding:0 22px;box-shadow:0 9px 20px rgba(52,209,127,.22)}.primary:hover{background:#45de8e}.primary:focus-visible,.tab:focus-visible,.icon-btn:focus-visible,.status-btn:focus-visible,.place-card:focus-visible{outline:3px solid #58a6ff;outline-offset:2px}
+    .workspace{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(330px,.75fr);gap:16px;min-height:600px}.map{min-height:600px;border-radius:26px;overflow:hidden;position:relative;background:#dfe9eb;border:1px solid #ccd9de;box-shadow:var(--shadow)}
+    #realMap{position:absolute;inset:0}.map-pin{border:3px solid white;border-radius:50%;width:44px;height:44px;font-weight:900;color:var(--navy);box-shadow:0 4px 12px #12243a55}.map-pin.selected{outline:3px solid var(--navy)}.map-pin:focus-visible{outline:3px solid #287cd4}.map-label{pointer-events:none;max-width:calc(100% - 80px)}.map-status{position:absolute;left:16px;top:95px;right:65px;background:white;padding:12px;border-radius:12px;z-index:4;font-size:14px}.map-status[hidden]{display:none}.map-legend{pointer-events:none}.maplibregl-ctrl-attrib{font-size:12px!important}.maplibregl-ctrl-bottom-right{max-width:100%}.maplibregl-ctrl-top-right{z-index:5}.map-legend{bottom:42px!important} 
+    .map-legend{position:absolute;left:18px;bottom:18px;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border:1px solid rgba(205,218,224,.85);border-radius:15px;padding:11px 13px;display:flex;gap:14px;font-size:13px;font-weight:700}.legend-item{display:flex;align-items:center;gap:6px}.dot{width:10px;height:10px;border-radius:50%}
+    .map-label{position:absolute;top:18px;left:18px;background:var(--navy);color:#fff;border-radius:13px;padding:10px 14px;font-weight:800;box-shadow:0 8px 18px rgba(11,29,51,.2)}
+    .side{background:#fff;border:1px solid var(--line);border-radius:26px;padding:18px;box-shadow:var(--shadow);display:flex;flex-direction:column;min-height:600px}.side-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.side-head h2{font-size:20px;margin:0}.count{color:var(--muted);font-size:14px}.places{display:flex;flex-direction:column;gap:10px;overflow:auto;padding-right:4px}.place-card{width:100%;text-align:left;border:1px solid var(--line);background:#fff;border-radius:18px;padding:15px;transition:.18s ease}.place-card:hover,.place-card.selected{border-color:#72dba4;transform:translateY(-1px);box-shadow:0 10px 24px rgba(26,65,49,.09)}.place-top{display:flex;justify-content:space-between;gap:12px}.place-name{font-weight:850;font-size:17px}.status{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:800;white-space:nowrap}.place-meta{display:flex;gap:12px;color:var(--muted);font-size:14px;margin-top:8px;flex-wrap:wrap}.loadbar{height:7px;background:#e7edf0;border-radius:99px;overflow:hidden;margin-top:12px}.loadbar i{display:block;height:100%;border-radius:99px}.offer{margin-top:10px;background:#fff4cf;color:#805f00;border-radius:10px;padding:8px 10px;font-size:13px;font-weight:750}.empty{padding:54px 20px;text-align:center;color:var(--muted)}
+    .sheet-backdrop{position:fixed;inset:0;background:rgba(3,15,28,.52);z-index:40;display:none;align-items:center;justify-content:center;padding:20px}.sheet-backdrop.open{display:flex}.sheet{width:min(760px,100%);max-height:90vh;background:#fff;border-radius:28px;overflow:auto;box-shadow:0 30px 90px rgba(0,0,0,.25)}.sheet-hero{height:220px;position:relative;background:radial-gradient(ellipse at top right,#357378,transparent 65%),#132b49}.sheet-hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,22,38,.05),rgba(8,22,38,.76))}.sheet-title{position:absolute;left:26px;right:70px;bottom:22px;z-index:2;color:#fff}.sheet-title h3{font-size:30px;margin:0 0 5px}.sheet-title p{margin:0;color:#d8e5ed}.icon-btn{width:40px;height:40px;border-radius:50%;border:0;background:rgba(255,255,255,.92);position:absolute;right:18px;top:18px;z-index:3;font-size:23px}.sheet-body{padding:24px 26px 28px}.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.metric{background:var(--bg);border-radius:15px;padding:14px}.metric strong{display:block;font-size:20px}.metric span{font-size:13px;color:var(--muted)}.sheet-actions{display:flex;gap:10px;margin-top:20px}.secondary{border:1px solid var(--line);background:#fff;color:var(--ink);font-weight:800;border-radius:14px;padding:13px 18px}.route{flex:1;border:0;background:var(--navy);color:#fff;font-weight:850;border-radius:14px;padding:13px 18px}
+    .owner{display:none}.owner.active{display:block}.explorer.hidden{display:none}.owner-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.75fr);gap:18px}.owner-card{background:#fff;border:1px solid var(--line);border-radius:24px;padding:22px;box-shadow:var(--shadow)}.owner-card h2{margin:0 0 6px;font-size:23px}.owner-card>p{margin:0 0 18px;color:var(--muted)}.status-buttons{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.status-btn{border:1px solid var(--line);background:#fff;border-radius:16px;padding:15px 10px;font-weight:800}.status-btn.active{border-color:var(--navy);box-shadow:0 0 0 2px var(--navy)}.status-btn .dot{display:inline-block;margin-right:7px}.range-row{margin-top:22px}.range-head{display:flex;justify-content:space-between;font-weight:800;margin-bottom:8px}.range-row input{width:100%;accent-color:var(--green2)}.input-label{display:block;margin-top:20px;font-size:14px;font-weight:800}.text-input{width:100%;border:1px solid var(--line);border-radius:14px;padding:12px 13px;margin-top:7px;outline:none}.owner-actions{display:flex;gap:10px;margin-top:20px}.owner-actions .primary{min-height:48px;flex:1}.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}.stat{background:var(--bg);border-radius:18px;padding:18px}.stat strong{font-size:28px;display:block}.stat span{color:var(--muted);font-size:14px}.chart{margin-top:18px;height:190px;display:flex;align-items:end;gap:9px;padding:14px 8px 0;border-bottom:1px solid var(--line)}.bar{flex:1;background:linear-gradient(180deg,var(--green),#159c58);border-radius:8px 8px 0 0;min-width:18px;position:relative}.bar span{position:absolute;bottom:-28px;left:50%;transform:translateX(-50%);font-size:12px;color:var(--muted)}.demo-note{margin-top:20px;background:#eaf8f1;border:1px solid #c7edd9;border-radius:16px;padding:14px;color:#176c43;font-size:14px}.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,30px);background:var(--navy);color:#fff;padding:13px 18px;border-radius:14px;opacity:0;pointer-events:none;transition:.2s;z-index:70;box-shadow:var(--shadow)}.toast.show{opacity:1;transform:translate(-50%,0)}
+    @media(max-width:900px){.topbar{height:auto;min-height:68px;padding:12px 16px;flex-wrap:wrap;gap:10px}.brand small,.live{display:none}.tabs{order:3;width:100%}.tab{flex:1}.filters{grid-template-columns:1fr 1fr}.filters .primary{min-height:54px}.workspace,.owner-grid{grid-template-columns:1fr}.map{min-height:430px}.side{min-height:auto}.places{max-height:none}.heading-row{align-items:start}.time-pill{display:none}main{padding:18px 14px 28px}}
+    @media(max-width:560px){.brand{font-size:15px}.brand-mark{width:32px;height:32px}.heading-row h1{font-size:29px}.filters{grid-template-columns:1fr}.workspace{gap:12px}.map{min-height:380px;border-radius:20px}.side{border-radius:20px;padding:14px}.map-legend{right:12px;left:12px;justify-content:center;gap:10px}.status-buttons,.metrics{grid-template-columns:1fr}.sheet-backdrop{padding:0;align-items:end}.sheet{border-radius:24px 24px 0 0;max-height:94vh}.sheet-hero{height:185px}.sheet-actions{flex-direction:column}.owner-card{padding:18px}.stats{grid-template-columns:1fr 1fr}}
+    .filters{grid-template-columns:1fr 1.2fr 1.4fr auto}.directory-note{color:var(--muted);font-size:14px;margin:0 0 16px;line-height:1.5}.place-top{flex-wrap:wrap;gap:8px}.place-name{overflow-wrap:anywhere}.place-address{font-size:14px;line-height:1.5;margin:10px 0;color:var(--ink)}.unknown{color:var(--muted);font-size:12px;margin-top:12px}.source-links{display:flex;flex-wrap:wrap;gap:16px;margin-top:18px}.source-links a{color:#185c7f;font-weight:700}.map-pin{font-size:20px}.sheet-hero{min-height:220px;height:auto}.sheet-title{position:relative;left:auto;right:auto;bottom:auto;padding:70px 26px 24px}.sheet-title h3{overflow-wrap:anywhere;font-size:28px}.metrics{grid-template-columns:1fr 1fr}.metric strong{font-size:17px}.map-legend{flex-wrap:wrap}.place-card:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #287cd4;outline-offset:3px}
+    @media(max-width:900px){.filters{grid-template-columns:1fr 1fr}}
+    @media(max-width:560px){.filters,.metrics{grid-template-columns:1fr}.sheet-title h3{font-size:24px}.owner-actions{flex-direction:column}.map-label{font-size:12px}}
+    .occupancy-caption{display:flex;align-items:center;gap:8px;margin-top:14px;font-size:14px}.demo-badge{display:inline-block;font-size:12px!important;font-weight:800;color:#805f00!important;background:#fff4cf;padding:3px 7px;border-radius:6px}.map-pin{font-size:13px}
+    .install-strip{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px;padding:14px 18px;background:#e6f8ef;border-radius:16px;color:#125b3b}.install-strip[hidden],.connection-note[hidden]{display:none}.connection-note{padding:12px;background:#fff4cf;border-radius:12px;color:#805f00}#installHelp{max-width:min(520px,90vw);border:0;border-radius:22px;padding:26px;color:var(--ink);line-height:1.6}#installHelp::backdrop{background:#0b1d3399}#installHelp p{font-size:16px}body{padding-bottom:env(safe-area-inset-bottom)}.topbar{padding-top:env(safe-area-inset-top);height:calc(72px + env(safe-area-inset-top))}.toast{bottom:calc(24px + env(safe-area-inset-bottom))}@media(max-width:900px){.topbar{height:auto}}@media(max-width:560px){.install-strip{align-items:stretch;flex-direction:column}.install-strip button{width:100%}}
+    .geo-controls{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 16px}.geo-controls span{font-size:14px;color:var(--muted);flex:1;min-width:220px}.geo-controls [hidden]{display:none}.user-location{width:24px;height:24px;background:#2679ed;border:4px solid white;border-radius:50%;box-shadow:0 0 0 7px #2679ed33,0 2px 8px #12243a66}.geo-controls button:disabled{opacity:.65;cursor:wait}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand"><div class="brand-mark">⌖</div><div>ГдеЕдим?<small>места твоего района</small></div></div>
+      <div class="live"><span class="live-dot"></span>Реальные заведения</div>
+      <nav class="tabs" aria-label="Режим приложения">
+        <button class="tab active" data-view="explorer">Карта посетителя</button>
+        <button class="tab" data-view="owner">Демо для бизнеса</button>
+      </nav>
+    </header>
+
+    <main>
+      <div class="install-strip" id="installStrip">
+        <span>ГдеЕдим? на главном экране</span>
+        <button class="secondary" id="installApp" type="button">Установить приложение</button>
+      </div>
+      <p class="connection-note" id="connectionNote" role="status" hidden>Нет подключения. Для карты и маршрутов нужен интернет.</p>
+      <dialog id="installHelp" aria-labelledby="installTitle">
+        <h2 id="installTitle">Приложение на телефоне</h2>
+        <p id="installInstructions"></p>
+        <p>После установки появится иконка. Для загрузки карты нужен интернет. При первом запуске может понадобиться повторный вход в аккаунт владельца сайта.</p>
+        <form method="dialog"><button class="secondary">Понятно</button></form>
+      </dialog>
+      <section class="explorer" id="explorerView">
+        <div class="heading-row">
+          <div><h1>Кофе или место для работы?</h1><p>Реальные места Солнцева, Ново-Переделкина и рядом. Выберите точку на карте.</p></div>
+          <div class="time-pill" id="clock">3 места · занятость демо</div>
+        </div>
+        <div class="filters" aria-label="Фильтры заведений">
+          <div class="field"><label for="query">Что ищем</label><select id="query"><option value="all">Все категории</option><option>Кофейня</option><option>Коворкинг</option></select></div>
+          <div class="field"><label for="area">Где ищем</label><select id="area"><option value="all">Оба района и рядом</option><option>Солнцево</option><option>Ново-Переделкино</option><option value="nearby">Рядом · Переделкино</option></select></div>
+          <div class="field"><label for="search">Название или адрес</label><input id="search" type="search" placeholder="Например, Боровское" autocomplete="off"></div>
+          <button class="primary" id="findBtn">Показать на карте</button>
+        </div>
+        <div class="geo-controls"><button type="button" class="secondary" id="locateMe">Моё местоположение</button><button type="button" class="secondary" id="clearLocation" hidden>Убрать мою точку</button><span id="geoStatus" role="status" aria-live="polite">Разрешите геолокацию, чтобы увидеть себя и расстояния до мест.</span></div>
+        <p class="directory-note">Занятость — условные значения для демонстрации, а не измерения. Реальную загрузку уточняйте у заведений. Цвет метки обозначает категорию.</p>
+        <div class="workspace">
+          <div class="map" aria-label="Карта Солнцева и Ново-Переделкина">
+            <div id="realMap"></div>
+            <div class="map-label">Солнцево · Ново-Переделкино</div>
+            <div class="map-status" id="mapStatus" role="status">Загрузка карты…</div>
+            <div class="map-legend"><span class="legend-item"><i class="dot" style="background:#dba96a"></i>Кофейни</span><span class="legend-item"><i class="dot" style="background:#afa0ef"></i>Работа</span><span class="legend-item">% · демо-занятость</span></div>
+          </div>
+          <aside class="side">
+            <div class="side-head"><h2>Подходящие места</h2><span class="count" id="resultCount"></span></div>
+            <div class="places" id="places"></div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="owner" id="ownerView">
+        <div class="heading-row"><div><h1>Панель заведения</h1><p>Учебный пример управления загрузкой. Реальные заведения на карте он не изменяет.</p></div><div class="time-pill">Учебная кофейня · вымышленное место</div></div>
+        <div class="owner-grid">
+          <div class="owner-card">
+            <h2>Текущая загрузка</h2><p>Изменения видны только в этом учебном примере</p>
+            <div class="status-buttons" id="statusButtons">
+              <button class="status-btn" data-value="free"><i class="dot" style="background:var(--green)"></i>Свободно</button>
+              <button class="status-btn" data-value="medium"><i class="dot" style="background:var(--yellow)"></i>Средняя</button>
+              <button class="status-btn" data-value="busy"><i class="dot" style="background:var(--red)"></i>Почти занято</button>
+            </div>
+            <div class="range-row"><div class="range-head"><span>Занято мест</span><span id="occupancyValue">32%</span></div><input id="occupancy" type="range" min="5" max="98" value="32" /></div>
+            <label class="input-label" for="offerInput">Предложение для свободных часов</label>
+            <input class="text-input" id="offerInput" value="Кофе + десерт — 399 ₽ до 16:00" />
+            <div class="owner-actions"><button class="primary" id="saveStatus">Сохранить пример</button><button class="secondary" id="resetDemo">Сбросить демо</button></div>
+            <div class="demo-note" id="demoResult">Измените загрузку и сохраните пример — ниже появится результат. Для передачи реальных данных потребуется подключение заведения.</div>
+          </div>
+          <div class="owner-card">
+            <h2>Сегодня</h2><p>Демонстрационная статистика</p>
+            <div class="stats"><div class="stat"><strong>61%</strong><span>средняя загрузка</span></div><div class="stat"><strong>23</strong><span>перехода из сервиса</span></div><div class="stat"><strong>18:00</strong><span>начало часа пик</span></div><div class="stat"><strong>12 450 ₽</strong><span>выручка по акциям</span></div></div>
+            <div class="chart" aria-label="График загрузки по времени"><div class="bar" style="height:28%"><span>10</span></div><div class="bar" style="height:42%"><span>12</span></div><div class="bar" style="height:74%"><span>14</span></div><div class="bar" style="height:55%"><span>16</span></div><div class="bar" style="height:92%"><span>18</span></div><div class="bar" style="height:78%"><span>20</span></div></div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="sheet-backdrop" id="detailBackdrop" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+    <article class="sheet"><div class="sheet-hero"><button class="icon-btn" id="closeDetail" aria-label="Закрыть">×</button><div class="sheet-title"><h3 id="detailTitle"></h3><p id="detailSubtitle"></p></div></div><div class="sheet-body"><div class="metrics" id="detailMetrics"></div><div class="offer" id="detailOffer"></div><div id="detailSources" class="source-links"></div><div class="sheet-actions"><button class="secondary" id="shareBtn">Поделиться</button><button class="route" id="routeBtn">Построить маршрут</button></div></div></article>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+
+const places=[
+  {
+    "id": "my-za-kofe",
+    "name": "Мы за кофе",
+    "type": "Кофейня",
+    "area": "Ново-Переделкино",
+    "address": "Москва, Боровское шоссе, 30, 1 этаж",
+    "lat": 55.641244,
+    "lng": 37.356172,
+    "source": "https://2gis.ru/moscow/firm/70000001043752506",
+    "sourceName": "Карточка в 2ГИС",
+    "note": "Кофейня на Боровском шоссе. В справочнике указано, что заведение давно не обновляло данные — перед визитом уточните работу.",
+    "position": "Метка здания; вход уточняйте на месте.",
+    "demoOccupancy": 35
+  },
+  {
+    "id": "erme",
+    "name": "Эрме",
+    "type": "Кофейня",
+    "area": "Ново-Переделкино",
+    "address": "Москва, Боровское шоссе, 40, 1 этаж",
+    "lat": 55.638104,
+    "lng": 37.350629,
+    "source": "https://2gis.ru/moscow/firm/70000001061600298",
+    "sourceName": "Карточка в 2ГИС",
+    "note": "Кофейня-кондитерская на Боровском шоссе.",
+    "position": "Метка здания; вход уточняйте на месте.",
+    "demoOccupancy": 65
+  },
+  {
+    "id": "peredelkino-cowork",
+    "name": "Коворкинг Дома творчества",
+    "type": "Коворкинг",
+    "area": "nearby",
+    "address": "Москва, Переделкино, ул. Погодина, 4с5",
+    "lat": 55.657293,
+    "lng": 37.334414,
+    "source": "https://pro-peredelkino.org/spaces/kovorking",
+    "sourceName": "Официальный сайт коворкинга",
+    "note": "Рядом с Ново-Переделкином, за пределами выбранных районов. Пространство для тихой работы; переговорные бронируются отдельно.",
+    "position": "Метка коворкинга по Яндекс Картам; вход уточняйте у администрации.",
+    "demoOccupancy": 80
+  }
+];
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const category={Кофейня:{icon:'☕',color:'#dba96a'},Коворкинг:{icon:'⌨',color:'#afa0ef'}};
+const areaLabel=p=>p.area==='nearby'?'Рядом · Переделкино':p.area;
+let selectedId='',realMap=null,markers=[],lastFocus=null;
+let userPosition=null,userMarker=null,locationRequest=0;
+let demo={load:32,offer:'Кофе + десерт — 399 ₽ до 16:00'};
+try{const d=JSON.parse(localStorage.getItem('freePlaceOwnerExample'));if(d&&Number.isFinite(d.load)&&typeof d.offer==='string')demo={load:Math.max(5,Math.min(98,d.load)),offer:d.offer}}catch{}
+const statusOf=load=>load<=40?{key:'free',label:'Много мест'}:load<=75?{key:'medium',label:'Средняя загрузка'}:{key:'busy',label:'Почти занято'};
+function distanceKm(a,b){const rad=x=>x*Math.PI/180;const dlat=rad(b.lat-a.lat),dlng=rad(b.lng-a.lng);const h=Math.sin(dlat/2)**2+Math.cos(rad(a.lat))*Math.cos(rad(b.lat))*Math.sin(dlng/2)**2;return 6371*2*Math.asin(Math.sqrt(Math.min(1,Math.max(0,h))))}
+function formatDistance(km){return km<1?Math.max(10,Math.round(km*1000/10)*10)+' м':km.toLocaleString('ru-RU',{maximumFractionDigits:1})+' км'}
+function paintUserLocation(center=false){if(!realMap||!userPosition)return;if(!userMarker){const dot=document.createElement('div');dot.className='user-location';dot.setAttribute('role','img');dot.setAttribute('aria-label','Ваше местоположение');dot.title='Ваше местоположение';userMarker=new maplibregl.Marker({element:dot}).setLngLat([userPosition.lng,userPosition.lat]).addTo(realMap)}else userMarker.setLngLat([userPosition.lng,userPosition.lat]);if(center)realMap.easeTo({center:[userPosition.lng,userPosition.lat],zoom:14,duration:600})}
+function clearUserLocation(){locationRequest++;userPosition=null;userMarker?.remove();userMarker=null;$('#locateMe').disabled=false;$('#locateMe').textContent='Моё местоположение';$('#clearLocation').hidden=true;$('#geoStatus').textContent='Точка удалена. Можно продолжать пользоваться картой без геолокации.';render()}
+function requestLocation(){const status=$('#geoStatus'),button=$('#locateMe');if(!window.isSecureContext||!navigator.geolocation){status.textContent='Геолокация недоступна. Откройте HTTPS-сайт в Safari или Chrome. Поиск заведений работает без неё.';return}const request=++locationRequest;button.disabled=true;button.textContent='Определяем…';status.textContent='Разрешите доступ к геопозиции в запросе браузера.';
+const failed=error=>{if(request!==locationRequest)return;button.disabled=false;button.textContent=userPosition?'Обновить местоположение':'Моё местоположение';status.textContent=({1:'Доступ к геолокации закрыт. Разрешите его в настройках браузера и повторите попытку.',2:'Не удалось определить местоположение. Проверьте службы геолокации и повторите попытку.',3:'Определение заняло слишком долго. Попробуйте ещё раз.'}[error.code]||'Не удалось определить местоположение.')+(userPosition?' Предыдущая точка сохранена на экране.':' Поиск работает без геолокации.')};
+try{navigator.geolocation.getCurrentPosition(position=>{if(request!==locationRequest)return;const c=position.coords;if(!Number.isFinite(c.latitude)||!Number.isFinite(c.longitude)||Math.abs(c.latitude)>90||Math.abs(c.longitude)>180){failed({code:2});return}userPosition={lat:c.latitude,lng:c.longitude};button.disabled=false;button.textContent='Обновить местоположение';$('#clearLocation').hidden=false;const nearest=Math.min(...places.map(p=>distanceKm(userPosition,p)));status.textContent='Местоположение определено'+(Number.isFinite(c.accuracy)?' · точность около '+Math.round(c.accuracy)+' м':'')+'. Расстояния по прямой; ближайшие места показаны первыми.'+(nearest>20?' Пока в каталоге только места Ново-Переделкина и рядом.':'');render();paintUserLocation(true)},failed,{enableHighAccuracy:true,timeout:15000,maximumAge:0})}catch{failed({code:2})}}
+$('#locateMe').addEventListener('click',requestLocation);$('#clearLocation').addEventListener('click',clearUserLocation);
+function filtered(){const q=$('#search').value.trim().toLocaleLowerCase('ru');return places.filter(p=>($('#query').value==='all'||p.type===$('#query').value)&&($('#area').value==='all'||p.area===$('#area').value)&&(!q||(p.name+' '+p.address).toLocaleLowerCase('ru').includes(q))).sort((a,b)=>userPosition?distanceKm(userPosition,a)-distanceKm(userPosition,b):0)}
+function render(){const visible=filtered();$('#resultCount').textContent=visible.length+' из '+places.length;$('#places').innerHTML=visible.length?visible.map(p=>`<button class="place-card ${p.id===selectedId?'selected':''}" data-id="${p.id}"><div class="place-top"><span class="place-name">${esc(p.name)}</span><span class="status"><i class="dot" style="background:${category[p.type].color}"></i>${esc(p.type)}</span></div><div class="place-meta">${esc(areaLabel(p))}${userPosition?`<span>≈ ${formatDistance(distanceKm(userPosition,p))} по прямой</span>`:''}</div><div class="place-address">${esc(p.address)}</div><div class="occupancy-caption"><strong>≈ ${p.demoOccupancy}% занято</strong><span class="demo-badge">ДЕМО</span></div><div class="loadbar"><i style="width:${p.demoOccupancy}%;background:${category[p.type].color}"></i></div><div class="unknown">Условный пример · Подробнее →</div></button>`).join(''):'<div class="empty"><strong>Места не найдены</strong><p>Измените категорию, район или текст поиска.</p><button class="secondary" id="clearFilters">Сбросить фильтры</button></div>';renderMapMarkers(visible);$$('[data-id]').forEach(el=>el.addEventListener('click',()=>openDetail(el.dataset.id)));$('#clearFilters')?.addEventListener('click',()=>{$('#query').value='all';$('#area').value='all';$('#search').value='';render();fitVisible()})}
+function mapUrl(p){return 'https://yandex.ru/maps/?text='+encodeURIComponent(p.name+' '+p.address)}
+function openDetail(id){const p=places.find(x=>x.id===id);if(!p)return;lastFocus=document.activeElement;selectedId=id;render();realMap?.easeTo({center:[p.lng,p.lat],duration:500});$('#detailTitle').textContent=p.name;$('#detailSubtitle').textContent=p.type+' · '+areaLabel(p);$('#detailMetrics').innerHTML=`<div class="metric"><strong>≈ ${p.demoOccupancy}% занято <span class="demo-badge">ДЕМО</span></strong><span>Условное значение, не реальная загрузка</span></div><div class="metric"><strong>Цены и расписание</strong><span>Уточните на странице заведения</span></div>`;$('#detailOffer').style.display='block';$('#detailOffer').textContent=p.address+' · '+p.note;$('#detailSources').innerHTML=`<a href="${esc(p.source)}" target="_blank" rel="noopener noreferrer">${esc(p.sourceName)} ↗</a><a href="${esc(mapUrl(p))}" target="_blank" rel="noopener noreferrer">Открыть в Яндекс Картах ↗</a><p class="directory-note">${esc(p.position)} Источники просмотрены 18.09.2026. Это справочник, партнёрство с заведением не заявлено.</p>`;$('#detailBackdrop').classList.add('open');$('#closeDetail').focus()}
+function closeDetail(){$('#detailBackdrop').classList.remove('open');const card=$$('[data-id]').find(e=>e.dataset.id===selectedId);(card||lastFocus)?.focus()}
+function showToast(message){const t=$('#toast');t.textContent=message;t.classList.add('show');clearTimeout(showToast.timer);showToast.timer=setTimeout(()=>t.classList.remove('show'),3200)}
+function switchView(view){$$('.tab').forEach(t=>t.classList.toggle('active',t.dataset.view===view));$('#explorerView').classList.toggle('hidden',view!=='explorer');$('#ownerView').classList.toggle('active',view==='owner');if(view==='owner')syncOwner();else{render();requestAnimationFrame(()=>realMap?.resize())}}
+function syncOwner(){$('#occupancy').value=demo.load;$('#occupancyValue').textContent=demo.load+'%';$('#offerInput').value=demo.offer;$$('.status-btn').forEach(b=>b.classList.toggle('active',b.dataset.value===statusOf(demo.load).key));$('#demoResult').textContent='Учебная кофейня: '+statusOf(demo.load).label+', занято '+demo.load+'%. '+demo.offer+' Это вымышленный пример, данные реальных заведений не меняются.'}
+function setLoad(value){const n=Number(value);if(!Number.isFinite(n))throw Error('Нужно указать число');demo.load=Math.max(5,Math.min(98,n));try{localStorage.setItem('freePlaceOwnerExample',JSON.stringify(demo))}catch{}syncOwner();return {...demo}}
+function fitVisible(){const visible=filtered();if(!realMap||!visible.length)return;const bounds=new maplibregl.LngLatBounds();visible.forEach(p=>bounds.extend([p.lng,p.lat]));realMap.fitBounds(bounds,{padding:75,maxZoom:15,duration:500})}
+$$('.tab').forEach(t=>t.addEventListener('click',()=>switchView(t.dataset.view)));
+['query','area'].forEach(id=>$('#'+id).addEventListener('change',()=>{render();fitVisible()}));$('#search').addEventListener('input',render);$('#findBtn').addEventListener('click',()=>{render();fitVisible();showToast('Найдено мест: '+filtered().length)});
+$('#closeDetail').addEventListener('click',closeDetail);$('#detailBackdrop').addEventListener('click',e=>{if(e.target===e.currentTarget)closeDetail()});
+document.addEventListener('keydown',e=>{if(!$('#detailBackdrop').classList.contains('open'))return;if(e.key==='Escape')closeDetail();if(e.key==='Tab'){const els=[...$('#detailBackdrop').querySelectorAll('button,a[href]')],first=els[0],last=els.at(-1);if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}});
+$('#occupancy').addEventListener('input',e=>{$('#occupancyValue').textContent=e.target.value+'%';$$('.status-btn').forEach(b=>b.classList.toggle('active',b.dataset.value===statusOf(+e.target.value).key))});
+$$('.status-btn').forEach(b=>b.addEventListener('click',()=>{$('#occupancy').value={free:25,medium:58,busy:88}[b.dataset.value];$('#occupancy').dispatchEvent(new Event('input'))}));
+$('#saveStatus').addEventListener('click',()=>{demo.offer=$('#offerInput').value.trim();setLoad($('#occupancy').value);showToast('Учебный пример сохранён')});$('#resetDemo').addEventListener('click',()=>{demo.offer='Кофе + десерт — 399 ₽ до 16:00';setLoad(32);showToast('Учебный пример сброшен')});
+$('#routeBtn').addEventListener('click',()=>{const p=places.find(x=>x.id===selectedId);if(p)window.open('https://yandex.ru/maps/?rtext=~'+p.lat+','+p.lng+'&rtt=pd','_blank','noopener,noreferrer')});
+$('#shareBtn').addEventListener('click',async()=>{const p=places.find(x=>x.id===selectedId),url=new URL(location.href);url.hash=p.id;const text=p.name+' · '+p.address+' · Демо-занятость ≈ '+p.demoOccupancy+'% (условный пример, не реальные данные)';try{if(navigator.share)await navigator.share({title:p.name,text,url:url.href});else{await navigator.clipboard.writeText(text+'\n'+url.href);showToast('Ссылка скопирована')}}catch(e){if(e.name!=='AbortError')showToast('Не удалось поделиться. Скопируйте адрес страницы.')}});
+function registerWebMCP(){const ctx=document.modelContext;if(!ctx?.registerTool)return;try{ctx.registerTool({name:'find_places',title:'Найти заведения района',description:'Реальные заведения с условными демонстрационными процентами занятости. Реальная загрузка, наличие мест и цены неизвестны.',inputSchema:{type:'object',properties:{type:{type:'string'},area:{type:'string'}},additionalProperties:false},annotations:{readOnlyHint:true},execute(input={}){return places.filter(p=>(!input.type||input.type==='all'||p.type===input.type)&&(!input.area||input.area==='all'||p.area===input.area)).map(p=>({...p,occupancy:null,freeSeats:null,demoOccupancyLabel:"Условный пример, не измерение"}))}});ctx.registerTool({name:'set_demo_occupancy',title:'Изменить учебный пример',description:'Меняет только вымышленную учебную кофейню, не реальные заведения.',inputSchema:{type:'object',properties:{percent:{type:'number',minimum:5,maximum:98}},required:['percent'],additionalProperties:false},annotations:{readOnlyHint:false},execute(input){return setLoad(input.percent)}})}catch(e){console.warn('WebMCP unavailable',e)}}
+function renderMapMarkers(visible){if(!realMap)return;markers.forEach(m=>m.remove());markers=[];visible.forEach(p=>{const c=category[p.type],button=document.createElement('button');button.type='button';button.className='map-pin'+(p.id===selectedId?' selected':'');button.style.background=c.color;button.textContent=p.demoOccupancy+'%';button.title='Демо-занятость: '+p.demoOccupancy+'%';button.setAttribute('aria-label',p.name+' · '+p.type+' · Демо-занятость: '+p.demoOccupancy+'%, условный пример');button.addEventListener('click',()=>openDetail(p.id));markers.push(new maplibregl.Marker({element:button,anchor:'center'}).setLngLat([p.lng,p.lat]).addTo(realMap))})}
+window.mapLoadFailed=()=>{const el=$('#mapStatus');el.hidden=false;el.textContent='Карта не загрузилась. Проверьте интернет и обновите страницу. Адреса и ссылки доступны в списке.'};
+window.initRealMap=()=>{if(realMap||!window.maplibregl)return;try{realMap=new maplibregl.Map({container:'realMap',style:'https://tiles.openfreemap.org/styles/liberty',center:[37.37,55.645],zoom:12.5,minZoom:3,maxZoom:19,attributionControl:true});realMap.addControl(new maplibregl.NavigationControl(),'top-right');realMap.fitBounds([[37.324,55.63],[37.409,55.662]],{padding:65,duration:0});realMap.on('load',()=>{$('#mapStatus').hidden=true;if(userPosition)paintUserLocation(true);else fitVisible()});realMap.on('error',window.mapLoadFailed);realMap.on('idle',()=>{if(realMap.isStyleLoaded()&&realMap.areTilesLoaded())$('#mapStatus').hidden=true});renderMapMarkers(filtered())}catch{window.mapLoadFailed()}};
+render();syncOwner();registerWebMCP();window.initRealMap();
+const initialId=location.hash.slice(1);if(places.some(p=>p.id===initialId))openDetail(initialId);
+window.addEventListener('hashchange',()=>{const id=location.hash.slice(1);if(places.some(p=>p.id===id))openDetail(id)});
+setTimeout(()=>{if(!realMap)window.mapLoadFailed()},12000);
+
+  </script>
+</body>
+</html>
