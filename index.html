@@ -3,20 +3,20 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#0b1d33" />
+  <meta name="theme-color" content="#382b25" />
   <meta name="description" content="ГдеЕдим? — кофейни и коворкинг Солнцева, Ново-Переделкина и рядом." />
   <title>ГдеЕдим?</title>
-  <link rel="manifest" href="/manifest.webmanifest" crossorigin="use-credentials">
-  <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180.png">
+  <link rel="manifest" href="./manifest.webmanifest" crossorigin="use-credentials">
+  <link rel="apple-touch-icon" sizes="180x180" href="./icons/icon-180.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="ГдеЕдим?">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <script defer src="/pwa.js"></script>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%230b1d33'/%3E%3Cpath d='M32 12c-9.4 0-17 7.6-17 17 0 12.4 17 25 17 25s17-12.6 17-25c0-9.4-7.6-17-17-17Z' fill='%2334d17f'/%3E%3Ccircle cx='32' cy='29' r='7' fill='%230b1d33'/%3E%3C/svg%3E" />
+  <script defer src="./pwa.js"></script>
+  <link rel="icon" href="./icons/icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.css" />
   <script defer src="https://unpkg.com/maplibre-gl@5/dist/maplibre-gl.js" onload="window.initRealMap?.()" onerror="window.mapLoadFailed?.()"></script>
   <style>
-    :root{--navy:#0b1d33;--navy2:#132b49;--green:#34d17f;--green2:#17ab60;--yellow:#f2c94c;--red:#ff5d6c;--bg:#f3f6f8;--card:#fff;--ink:#12243a;--muted:#65758a;--line:#d9e2e8;--shadow:0 18px 44px rgba(15,35,57,.12)}
+    :root{--navy:#382b25;--navy2:#132b49;--green:#34d17f;--green2:#17ab60;--yellow:#f2c94c;--red:#ff5d6c;--bg:#f3f6f8;--card:#fff;--ink:#12243a;--muted:#65758a;--line:#d9e2e8;--shadow:0 18px 44px rgba(15,35,57,.12)}
     *{box-sizing:border-box} html{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg)} body{margin:0;min-height:100vh} button,input,select{font:inherit} button{cursor:pointer}
     .app{min-height:100vh}.topbar{height:72px;background:var(--navy);color:#fff;display:flex;align-items:center;gap:24px;padding:0 32px;position:sticky;top:0;z-index:20;box-shadow:0 8px 24px rgba(9,25,43,.18)}
     .brand{display:flex;align-items:center;gap:12px;font-weight:850;letter-spacing:.01em;white-space:nowrap}.brand-mark{width:36px;height:36px;border-radius:12px;background:var(--green);display:grid;place-items:center;color:var(--navy);font-size:20px}.brand small{display:block;color:#aebfd0;font-weight:500;font-size:12px;margin-top:1px}
@@ -37,17 +37,18 @@
     @media(max-width:900px){.filters{grid-template-columns:1fr 1fr}}
     @media(max-width:560px){.filters,.metrics{grid-template-columns:1fr}.sheet-title h3{font-size:24px}.owner-actions{flex-direction:column}.map-label{font-size:12px}}
     .occupancy-caption{display:flex;align-items:center;gap:8px;margin-top:14px;font-size:14px}.demo-badge{display:inline-block;font-size:12px!important;font-weight:800;color:#805f00!important;background:#fff4cf;padding:3px 7px;border-radius:6px}.map-pin{font-size:13px}
-    .install-strip{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px;padding:14px 18px;background:#e6f8ef;border-radius:16px;color:#125b3b}.install-strip[hidden],.connection-note[hidden]{display:none}.connection-note{padding:12px;background:#fff4cf;border-radius:12px;color:#805f00}#installHelp{max-width:min(520px,90vw);border:0;border-radius:22px;padding:26px;color:var(--ink);line-height:1.6}#installHelp::backdrop{background:#0b1d3399}#installHelp p{font-size:16px}body{padding-bottom:env(safe-area-inset-bottom)}.topbar{padding-top:env(safe-area-inset-top);height:calc(72px + env(safe-area-inset-top))}.toast{bottom:calc(24px + env(safe-area-inset-bottom))}@media(max-width:900px){.topbar{height:auto}}@media(max-width:560px){.install-strip{align-items:stretch;flex-direction:column}.install-strip button{width:100%}}
+    .install-strip{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px;padding:14px 18px;background:#e6f8ef;border-radius:16px;color:#125b3b}.install-strip[hidden],.connection-note[hidden]{display:none}.connection-note{padding:12px;background:#fff4cf;border-radius:12px;color:#805f00}#installHelp{max-width:min(520px,90vw);border:0;border-radius:22px;padding:26px;color:var(--ink);line-height:1.6}#installHelp::backdrop{background:#382b2599}#installHelp p{font-size:16px}body{padding-bottom:env(safe-area-inset-bottom)}.topbar{padding-top:env(safe-area-inset-top);height:calc(72px + env(safe-area-inset-top))}.toast{bottom:calc(24px + env(safe-area-inset-bottom))}@media(max-width:900px){.topbar{height:auto}}@media(max-width:560px){.install-strip{align-items:stretch;flex-direction:column}.install-strip button{width:100%}}
     .geo-controls{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 16px}.geo-controls span{font-size:14px;color:var(--muted);flex:1;min-width:220px}.geo-controls [hidden]{display:none}.user-location{width:24px;height:24px;background:#2679ed;border:4px solid white;border-radius:50%;box-shadow:0 0 0 7px #2679ed33,0 2px 8px #12243a66}.geo-controls button:disabled{opacity:.65;cursor:wait}
   </style>
+  <link rel="stylesheet" href="./design.css?v=2">
 </head>
 <body>
   <div class="app">
     <header class="topbar">
-      <div class="brand"><div class="brand-mark">⌖</div><div>ГдеЕдим?<small>места твоего района</small></div></div>
-      <div class="live"><span class="live-dot"></span>Реальные заведения</div>
+      <div class="brand"><img class="brand-mark" src="./icons/icon.svg" alt="" width="42" height="42"><div>ГдеЕдим?<small>маленькие открытия рядом</small></div></div>
+      <div class="live">Ваш район. Ваше место.</div>
       <nav class="tabs" aria-label="Режим приложения">
-        <button class="tab active" data-view="explorer">Карта посетителя</button>
+        <button class="tab active" data-view="explorer">Найти место</button>
         <button class="tab" data-view="owner">Демо для бизнеса</button>
       </nav>
     </header>
@@ -61,14 +62,15 @@
       <dialog id="installHelp" aria-labelledby="installTitle">
         <h2 id="installTitle">Приложение на телефоне</h2>
         <p id="installInstructions"></p>
-        <p>После установки появится иконка. Для загрузки карты нужен интернет. При первом запуске может понадобиться повторный вход в аккаунт владельца сайта.</p>
+        <p>После установки появится иконка. Для загрузки карты нужен интернет. Вход в аккаунт не нужен.</p>
         <form method="dialog"><button class="secondary">Понятно</button></form>
       </dialog>
       <section class="explorer" id="explorerView">
-        <div class="heading-row">
-          <div><h1>Кофе или место для работы?</h1><p>Реальные места Солнцева, Ново-Переделкина и рядом. Выберите точку на карте.</p></div>
-          <div class="time-pill" id="clock">3 места · занятость демо</div>
+        <div class="food-hero">
+          <div class="hero-copy"><p class="eyebrow">НОВО-ПЕРЕДЕЛКИНО · СОЛНЦЕВО · РЯДОМ</p><h1>Хороший день<br>начинается <em>с места.</em></h1><p class="hero-description">На кофе, на встречу или поработать.<br>Найдите свой уголок рядом с домом.</p><a class="hero-link" href="#discovery">Выбрать место <span aria-hidden="true">↘</span></a></div>
+          <div class="hero-art"><img src="./table.svg" alt="Иллюстрация: кофе и круассан на столе" width="540" height="340"><span class="art-caption">Планы на сегодня: сделать паузу.</span></div>
         </div>
+        <div class="section-heading" id="discovery"><div><p class="eyebrow">ВАШ МАЛЕНЬКИЙ ПУТЕВОДИТЕЛЬ</p><h2>Куда заглянем?</h2></div><p>Пока кофейни и места для работы.<br>Кафе и рестораны — в планах.</p></div>
         <div class="filters" aria-label="Фильтры заведений">
           <div class="field"><label for="query">Что ищем</label><select id="query"><option value="all">Все категории</option><option>Кофейня</option><option>Коворкинг</option></select></div>
           <div class="field"><label for="area">Где ищем</label><select id="area"><option value="all">Оба района и рядом</option><option>Солнцево</option><option>Ново-Переделкино</option><option value="nearby">Рядом · Переделкино</option></select></div>
@@ -82,10 +84,10 @@
             <div id="realMap"></div>
             <div class="map-label">Солнцево · Ново-Переделкино</div>
             <div class="map-status" id="mapStatus" role="status">Загрузка карты…</div>
-            <div class="map-legend"><span class="legend-item"><i class="dot" style="background:#dba96a"></i>Кофейни</span><span class="legend-item"><i class="dot" style="background:#afa0ef"></i>Работа</span><span class="legend-item">% · демо-занятость</span></div>
+            <div class="map-legend"><span class="legend-item"><i class="dot" style="background:#e8b399"></i>Кофейни</span><span class="legend-item"><i class="dot" style="background:#b9c1a1"></i>Работа</span><span class="legend-item">Метки по категориям</span></div>
           </div>
           <aside class="side">
-            <div class="side-head"><h2>Подходящие места</h2><span class="count" id="resultCount"></span></div>
+            <div class="side-head"><h2>Места для вас</h2><span class="count" id="resultCount"></span></div>
             <div class="places" id="places"></div>
           </aside>
         </div>
@@ -114,6 +116,7 @@
           </div>
         </div>
       </section>
+    <footer class="site-footer"><strong>ГдеЕдим?</strong><span>Места, ради которых стоит выйти из дома.</span><small>Учебный проект · Занятость демонстрационная</small></footer>
     </main>
   </div>
 
@@ -170,7 +173,7 @@ const places=[
 ];
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const category={Кофейня:{icon:'☕',color:'#dba96a'},Коворкинг:{icon:'⌨',color:'#afa0ef'}};
+const category={Кофейня:{icon:'☕',color:'#e8b399'},Коворкинг:{icon:'⌨',color:'#b9c1a1'}};
 const areaLabel=p=>p.area==='nearby'?'Рядом · Переделкино':p.area;
 let selectedId='',realMap=null,markers=[],lastFocus=null;
 let userPosition=null,userMarker=null,locationRequest=0;
@@ -186,7 +189,7 @@ const failed=error=>{if(request!==locationRequest)return;button.disabled=false;b
 try{navigator.geolocation.getCurrentPosition(position=>{if(request!==locationRequest)return;const c=position.coords;if(!Number.isFinite(c.latitude)||!Number.isFinite(c.longitude)||Math.abs(c.latitude)>90||Math.abs(c.longitude)>180){failed({code:2});return}userPosition={lat:c.latitude,lng:c.longitude};button.disabled=false;button.textContent='Обновить местоположение';$('#clearLocation').hidden=false;const nearest=Math.min(...places.map(p=>distanceKm(userPosition,p)));status.textContent='Местоположение определено'+(Number.isFinite(c.accuracy)?' · точность около '+Math.round(c.accuracy)+' м':'')+'. Расстояния по прямой; ближайшие места показаны первыми.'+(nearest>20?' Пока в каталоге только места Ново-Переделкина и рядом.':'');render();paintUserLocation(true)},failed,{enableHighAccuracy:true,timeout:15000,maximumAge:0})}catch{failed({code:2})}}
 $('#locateMe').addEventListener('click',requestLocation);$('#clearLocation').addEventListener('click',clearUserLocation);
 function filtered(){const q=$('#search').value.trim().toLocaleLowerCase('ru');return places.filter(p=>($('#query').value==='all'||p.type===$('#query').value)&&($('#area').value==='all'||p.area===$('#area').value)&&(!q||(p.name+' '+p.address).toLocaleLowerCase('ru').includes(q))).sort((a,b)=>userPosition?distanceKm(userPosition,a)-distanceKm(userPosition,b):0)}
-function render(){const visible=filtered();$('#resultCount').textContent=visible.length+' из '+places.length;$('#places').innerHTML=visible.length?visible.map(p=>`<button class="place-card ${p.id===selectedId?'selected':''}" data-id="${p.id}"><div class="place-top"><span class="place-name">${esc(p.name)}</span><span class="status"><i class="dot" style="background:${category[p.type].color}"></i>${esc(p.type)}</span></div><div class="place-meta">${esc(areaLabel(p))}${userPosition?`<span>≈ ${formatDistance(distanceKm(userPosition,p))} по прямой</span>`:''}</div><div class="place-address">${esc(p.address)}</div><div class="occupancy-caption"><strong>≈ ${p.demoOccupancy}% занято</strong><span class="demo-badge">ДЕМО</span></div><div class="loadbar"><i style="width:${p.demoOccupancy}%;background:${category[p.type].color}"></i></div><div class="unknown">Условный пример · Подробнее →</div></button>`).join(''):'<div class="empty"><strong>Места не найдены</strong><p>Измените категорию, район или текст поиска.</p><button class="secondary" id="clearFilters">Сбросить фильтры</button></div>';renderMapMarkers(visible);$$('[data-id]').forEach(el=>el.addEventListener('click',()=>openDetail(el.dataset.id)));$('#clearFilters')?.addEventListener('click',()=>{$('#query').value='all';$('#area').value='all';$('#search').value='';render();fitVisible()})}
+function render(){const visible=filtered();$('#resultCount').textContent=visible.length+' из '+places.length;$('#places').innerHTML=visible.length?visible.map(p=>`<button class="place-card ${p.id===selectedId?'selected':''}" data-id="${p.id}"><div class="place-cover ${p.type==='Кофейня'?'coffee-cover':'work-cover'}"><span aria-hidden="true">${category[p.type].icon}</span><small>${p.type==='Кофейня'?'ВРЕМЯ ДЛЯ КОФЕ':'ВАШ РАБОЧИЙ УГОЛОК'}</small></div><div class="place-top"><span class="place-name">${esc(p.name)}</span><span class="status"><i class="dot" style="background:${category[p.type].color}"></i>${esc(p.type)}</span></div><div class="place-meta">${esc(areaLabel(p))}${userPosition?`<span>≈ ${formatDistance(distanceKm(userPosition,p))} по прямой</span>`:''}</div><div class="place-address">${esc(p.address)}</div><div class="occupancy-caption"><strong>≈ ${p.demoOccupancy}% занято</strong><span class="demo-badge">ДЕМО</span></div><div class="unknown">Условный пример, не измерение</div><div class="card-cta">Заглянуть подробнее <span aria-hidden="true">↗</span></div></button>`).join(''):'<div class="empty"><strong>Места не найдены</strong><p>Измените категорию, район или текст поиска.</p><button class="secondary" id="clearFilters">Сбросить фильтры</button></div>';renderMapMarkers(visible);$$('[data-id]').forEach(el=>el.addEventListener('click',()=>openDetail(el.dataset.id)));$('#clearFilters')?.addEventListener('click',()=>{$('#query').value='all';$('#area').value='all';$('#search').value='';render();fitVisible()})}
 function mapUrl(p){return 'https://yandex.ru/maps/?text='+encodeURIComponent(p.name+' '+p.address)}
 function openDetail(id){const p=places.find(x=>x.id===id);if(!p)return;lastFocus=document.activeElement;selectedId=id;render();realMap?.easeTo({center:[p.lng,p.lat],duration:500});$('#detailTitle').textContent=p.name;$('#detailSubtitle').textContent=p.type+' · '+areaLabel(p);$('#detailMetrics').innerHTML=`<div class="metric"><strong>≈ ${p.demoOccupancy}% занято <span class="demo-badge">ДЕМО</span></strong><span>Условное значение, не реальная загрузка</span></div><div class="metric"><strong>Цены и расписание</strong><span>Уточните на странице заведения</span></div>`;$('#detailOffer').style.display='block';$('#detailOffer').textContent=p.address+' · '+p.note;$('#detailSources').innerHTML=`<a href="${esc(p.source)}" target="_blank" rel="noopener noreferrer">${esc(p.sourceName)} ↗</a><a href="${esc(mapUrl(p))}" target="_blank" rel="noopener noreferrer">Открыть в Яндекс Картах ↗</a><p class="directory-note">${esc(p.position)} Источники просмотрены 18.09.2026. Это справочник, партнёрство с заведением не заявлено.</p>`;$('#detailBackdrop').classList.add('open');$('#closeDetail').focus()}
 function closeDetail(){$('#detailBackdrop').classList.remove('open');const card=$$('[data-id]').find(e=>e.dataset.id===selectedId);(card||lastFocus)?.focus()}
@@ -205,7 +208,7 @@ $('#saveStatus').addEventListener('click',()=>{demo.offer=$('#offerInput').value
 $('#routeBtn').addEventListener('click',()=>{const p=places.find(x=>x.id===selectedId);if(p)window.open('https://yandex.ru/maps/?rtext=~'+p.lat+','+p.lng+'&rtt=pd','_blank','noopener,noreferrer')});
 $('#shareBtn').addEventListener('click',async()=>{const p=places.find(x=>x.id===selectedId),url=new URL(location.href);url.hash=p.id;const text=p.name+' · '+p.address+' · Демо-занятость ≈ '+p.demoOccupancy+'% (условный пример, не реальные данные)';try{if(navigator.share)await navigator.share({title:p.name,text,url:url.href});else{await navigator.clipboard.writeText(text+'\n'+url.href);showToast('Ссылка скопирована')}}catch(e){if(e.name!=='AbortError')showToast('Не удалось поделиться. Скопируйте адрес страницы.')}});
 function registerWebMCP(){const ctx=document.modelContext;if(!ctx?.registerTool)return;try{ctx.registerTool({name:'find_places',title:'Найти заведения района',description:'Реальные заведения с условными демонстрационными процентами занятости. Реальная загрузка, наличие мест и цены неизвестны.',inputSchema:{type:'object',properties:{type:{type:'string'},area:{type:'string'}},additionalProperties:false},annotations:{readOnlyHint:true},execute(input={}){return places.filter(p=>(!input.type||input.type==='all'||p.type===input.type)&&(!input.area||input.area==='all'||p.area===input.area)).map(p=>({...p,occupancy:null,freeSeats:null,demoOccupancyLabel:"Условный пример, не измерение"}))}});ctx.registerTool({name:'set_demo_occupancy',title:'Изменить учебный пример',description:'Меняет только вымышленную учебную кофейню, не реальные заведения.',inputSchema:{type:'object',properties:{percent:{type:'number',minimum:5,maximum:98}},required:['percent'],additionalProperties:false},annotations:{readOnlyHint:false},execute(input){return setLoad(input.percent)}})}catch(e){console.warn('WebMCP unavailable',e)}}
-function renderMapMarkers(visible){if(!realMap)return;markers.forEach(m=>m.remove());markers=[];visible.forEach(p=>{const c=category[p.type],button=document.createElement('button');button.type='button';button.className='map-pin'+(p.id===selectedId?' selected':'');button.style.background=c.color;button.textContent=p.demoOccupancy+'%';button.title='Демо-занятость: '+p.demoOccupancy+'%';button.setAttribute('aria-label',p.name+' · '+p.type+' · Демо-занятость: '+p.demoOccupancy+'%, условный пример');button.addEventListener('click',()=>openDetail(p.id));markers.push(new maplibregl.Marker({element:button,anchor:'center'}).setLngLat([p.lng,p.lat]).addTo(realMap))})}
+function renderMapMarkers(visible){if(!realMap)return;markers.forEach(m=>m.remove());markers=[];visible.forEach(p=>{const c=category[p.type],button=document.createElement('button');button.type='button';button.className='map-pin'+(p.id===selectedId?' selected':'');button.style.background=c.color;button.textContent=c.icon;button.title='Демо-занятость: '+p.demoOccupancy+'%';button.setAttribute('aria-label',p.name+' · '+p.type+' · Демо-занятость: '+p.demoOccupancy+'%, условный пример');button.addEventListener('click',()=>openDetail(p.id));markers.push(new maplibregl.Marker({element:button,anchor:'center'}).setLngLat([p.lng,p.lat]).addTo(realMap))})}
 window.mapLoadFailed=()=>{const el=$('#mapStatus');el.hidden=false;el.textContent='Карта не загрузилась. Проверьте интернет и обновите страницу. Адреса и ссылки доступны в списке.'};
 window.initRealMap=()=>{if(realMap||!window.maplibregl)return;try{realMap=new maplibregl.Map({container:'realMap',style:'https://tiles.openfreemap.org/styles/liberty',center:[37.37,55.645],zoom:12.5,minZoom:3,maxZoom:19,attributionControl:true});realMap.addControl(new maplibregl.NavigationControl(),'top-right');realMap.fitBounds([[37.324,55.63],[37.409,55.662]],{padding:65,duration:0});realMap.on('load',()=>{$('#mapStatus').hidden=true;if(userPosition)paintUserLocation(true);else fitVisible()});realMap.on('error',window.mapLoadFailed);realMap.on('idle',()=>{if(realMap.isStyleLoaded()&&realMap.areTilesLoaded())$('#mapStatus').hidden=true});renderMapMarkers(filtered())}catch{window.mapLoadFailed()}};
 render();syncOwner();registerWebMCP();window.initRealMap();
