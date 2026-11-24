@@ -48,6 +48,7 @@
       <div class="brand"><img class="brand-mark" src="./icons/icon.svg" alt="" width="42" height="42"><div>ГдеЕдим?<small>маленькие открытия рядом</small></div></div>
       <div class="live">Ваш район. Ваше место.</div>
       <nav class="tabs" aria-label="Режим приложения">
+        <a class="tab" id="districtLink" href="./district.html">Столики и предложения</a>
         <button class="tab active" data-view="explorer">Найти место</button>
         <button class="tab" data-view="owner">Демо для бизнеса</button>
       </nav>
@@ -217,5 +218,5 @@ window.addEventListener('hashchange',()=>{const id=location.hash.slice(1);if(pla
 setTimeout(()=>{if(!realMap)window.mapLoadFailed()},12000);
 
   </script>
-</body>
+<script src="./site-config.js"></script><script>const fullGuide = window.GDEEDIM_APP_URL; if (location.pathname === "/nearby/index.html") document.querySelector("#districtLink").href="/"; else if (fullGuide) document.querySelector("#districtLink").href=fullGuide;</script></body>
 </html>

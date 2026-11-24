@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ru"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Каталог Ново-Переделкина · ГдеЕдим?</title>
+<link rel="stylesheet" href="./public/map.css">
+<style>
+*{box-sizing:border-box}body{background:#faf6ee;color:#392c30;font:17px/1.5 system-ui;margin:0}main{max-width:1160px;margin:auto;padding:24px}h1,h2{font-family:Georgia,serif}h1{font-size:clamp(32px,5vw,58px);margin:22px 0 0}a{color:#90452c}input,select,button{font:inherit;padding:9px;border-radius:7px;border:1px solid #cfbfb0;background:white}.filters{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0}.layout{display:grid;grid-template-columns:2fr 3fr;gap:16px}#map{height:510px;border-radius:12px}#list{overflow:auto;max-height:510px}article{border-top:1px solid #dbcfc0;padding:12px 0}h2,p{margin:4px 0}#summary{margin:14px 0}@media(max-width:700px){.layout{display:flex;flex-direction:column-reverse}#map{height:340px}}
+</style>
+<main><a href="./index.html">К кофейням и коворкингам</a><h1>Где поесть в Ново-Переделкине</h1>
+<p id="summary" role="status">Загрузка каталога…</p>
+<p>На этой карте опубликован снимок OpenStreetMap. Свежие статусы столиков, вход и предложения появятся после подключения сервера.</p>
+<div class="filters"><input id="search" aria-label="Поиск по названию или адресу" placeholder="Название или адрес"><select id="type" aria-label="Тип заведения"><option value="">Все места</option><option value="cafe">Кафе</option><option value="restaurant">Рестораны</option><option value="coffee">Кофейни</option></select><label><input id="only" type="checkbox"> Избранное</label></div>
+<div class="layout"><section id="list" aria-label="Заведения"></section><div id="map" aria-label="Карта района"></div></div></main>
+<script src="./site-config.js"></script><script type="module">
+import {createMap} from './public/map.js';
+if(window.GDEEDIM_APP_URL) location.replace(window.GDEEDIM_APP_URL);
+const el=id=>document.getElementById(id), list=el('list'), summary=el('summary');
+const types={cafe:'Кафе',restaurant:'Ресторан',coffee:'Кофейня'};
+let favorites=[];try{favorites=JSON.parse(localStorage.getItem('gde-pages-favorites')||'[]');if(!Array.isArray(favorites))favorites=[]}catch{}
+const map=createMap(el('map'),v=>document.getElementById(v.id)?.scrollIntoView({block:'center'}),m=>summary.textContent=m);
+try{
+ const response=await fetch('./data/catalog.json');if(!response.ok)throw Error();
+ const data=await response.json();
+ function render(){
+  const q=el('search').value.trim().toLowerCase();
+  const venues=data.venues.filter(v=>(!el('type').value||el('type').value===v.type)&&(!el('only').checked||favorites.includes(v.id))&&(v.name+' '+(v.address||'')).toLowerCase().includes(q));
+  list.replaceChildren();map.update(venues);summary.textContent='Найдено мест: '+venues.length+' из '+data.count+' · снимок от '+new Date(data.importedAt).toLocaleDateString('ru-RU');
+  if(!venues.length)list.textContent='Попробуйте другое название или измените фильтр.';
+  for(const v of venues){
+   const card=document.createElement('article');card.id=v.id;
+   const title=document.createElement('h2');title.textContent=v.name;
+   const details=document.createElement('p');details.textContent=types[v.type]+' · '+(v.address||'Адрес не указан');
+   const source=document.createElement('a');source.href=v.sourceUrl;source.textContent='Источник OSM';source.target='_blank';source.rel='noreferrer';
+   const save=document.createElement('button');save.textContent=favorites.includes(v.id)?'Убрать из избранного':'В избранное';save.onclick=()=>{favorites=favorites.includes(v.id)?favorites.filter(id=>id!==v.id):[...favorites,v.id];try{localStorage.setItem('gde-pages-favorites',JSON.stringify(favorites))}catch{}render()};
+   card.append(title,details,source,document.createTextNode(' · '),save);list.append(card);
+  }
+ }
+ ['search','type','only'].forEach(id=>el(id).addEventListener('input',render));render();
+}catch{summary.textContent='Не удалось загрузить каталог. Обновите страницу.'}
+</script></html>

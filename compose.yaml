@@ -1,0 +1,57 @@
+name: gde-edim
+x-app: &app
+  build: .
+  restart: unless-stopped
+  depends_on:
+    db:
+      condition: service_healthy
+  volumes:
+    - db_socket:/var/run/postgresql
+  environment: &env
+    PGHOST: /var/run/postgresql
+    PGUSER: guide
+    PGDATABASE: guide
+    AVAILABILITY_TTL_MINUTES: ${AVAILABILITY_TTL_MINUTES:-30}
+    YOOKASSA_MODE: ${YOOKASSA_MODE:-test}
+    YOOKASSA_ENABLE_LIVE: ${YOOKASSA_ENABLE_LIVE:-false}
+    YOOKASSA_SHOP_ID: ${YOOKASSA_SHOP_ID:-}
+    YOOKASSA_SECRET_KEY: ${YOOKASSA_SECRET_KEY:-}
+services:
+  db:
+    image: postgres:17-bookworm
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: guide
+      POSTGRES_DB: guide
+      POSTGRES_HOST_AUTH_METHOD: trust
+    command: ["postgres", "-c", "listen_addresses="]
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - db_socket:/var/run/postgresql
+    healthcheck:
+      test: ["CMD", "pg_isready", "-h", "/var/run/postgresql", "-U", "guide", "-d", "guide"]
+      interval: 3s
+      timeout: 3s
+      retries: 30
+  app:
+    <<: *app
+    ports: ["127.0.0.1:3000:3000"]
+    environment:
+      <<: *env
+      APP_MODE: catalog
+      PUBLIC_BASE_URL: ${APP_PUBLIC_URL:-http://localhost:3000}
+  demo:
+    <<: *app
+    profiles: ["demo"]
+    ports: ["127.0.0.1:3001:3000"]
+    environment:
+      <<: *env
+      APP_MODE: demo
+      PUBLIC_BASE_URL: ${DEMO_PUBLIC_URL:-http://localhost:3001}
+      YOOKASSA_MODE: test
+      YOOKASSA_ENABLE_LIVE: "false"
+      YOOKASSA_SHOP_ID: ${DEMO_YOOKASSA_SHOP_ID:-}
+      YOOKASSA_SECRET_KEY: ${DEMO_YOOKASSA_SECRET_KEY:-}
+volumes:
+  db_data:
+  db_socket:

@@ -1,0 +1,13 @@
+{
+  "tiles": "https://tiles.openfreemap.org/planet/20261115_080022_pt/{z}/{x}/{y}.pbf",
+  "zoom": 14,
+  "range": {
+    "west": 9888,
+    "east": 9896,
+    "north": 5126,
+    "south": 5134
+  },
+  "bytes": 3353879,
+  "retrieved": "2026-11-23T18:58:39.012Z",
+  "attribution": "OpenFreeMap © OpenMapTiles, данные © участников OpenStreetMap, ODbL 1.0"
+}
