@@ -1,0 +1,5 @@
+{"source":"Учебный каталог","importedAt":null,"boundaryId":null,"venues":[
+ {"id":"demo-bistro","name":"Учебное бистро","type":"restaurant","lat":55.6408,"lon":37.3666,"address":null,"hours":null},
+ {"id":"demo-coffee","name":"Учебная кофейня","type":"coffee","lat":55.6424,"lon":37.3657,"address":null,"hours":null},
+ {"id":"demo-cafe","name":"Учебное кафе","type":"cafe","lat":55.6371,"lon":37.3541,"address":null,"hours":null}
+]}

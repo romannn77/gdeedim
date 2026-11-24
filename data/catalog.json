@@ -1,0 +1,196 @@
+{
+  "source": "OpenStreetMap",
+  "sourceUrl": "https://www.openstreetmap.org/relation/446117",
+  "attribution": "© Участники OpenStreetMap",
+  "license": "ODbL 1.0",
+  "licenseUrl": "https://www.openstreetmap.org/copyright",
+  "importedAt": "2026-11-23T19:00:51.583Z",
+  "verifiedAt": "2026-11-23T18:55:37.720Z",
+  "boundaryId": "relation/446117",
+  "boundaryVersion": 44,
+  "count": 11,
+  "coverageGaps": [
+    "В каталог входят нанесённые на OSM рестораны, кафе и кофейни с названием. Изменения у заведений могут появляться в OSM с задержкой.",
+    "Бары, фастфуд и магазины зерна без подтверждённой подачи кофе исключены. У части заведений отсутствуют адрес или часы работы.",
+    "Дата проверки фиксирует чтение данных OSM. Подтверждение свободных столиков поступает отдельно от партнёра."
+  ],
+  "review": [],
+  "venues": [
+    {
+      "id": "node/4343011490",
+      "name": "Алло-пицца Переделкино",
+      "type": "cafe",
+      "lat": 55.6358136,
+      "lon": 37.3476532,
+      "address": "Боровское шоссе, 50",
+      "hours": "Mo-Su 11:00-23:00",
+      "sourceUrl": "https://www.openstreetmap.org/node/4343011490",
+      "sourceIds": [
+        "node/4343011490"
+      ],
+      "verifiedAt": "2026-11-23T18:55:37.720Z",
+      "osmUpdatedAt": "2023-09-17T22:55:32Z",
+      "addressSourceId": "way/128047881"
+    },
+    {
+      "id": "node/7208373933",
+      "name": "Арго",
+      "type": "cafe",
+      "lat": 55.6358869,
+      "lon": 37.3421855,
+      "address": "улица Федосьино, 4",
+      "hours": "Mo-Su 12:00-03:00",
+      "sourceUrl": "https://www.openstreetmap.org/node/7208373933",
+      "sourceIds": [
+        "node/7208373933"
+      ],
+      "verifiedAt": "2026-11-23T18:55:37.720Z",
+      "osmUpdatedAt": "2023-09-17T22:55:32Z",
+      "addressSourceId": "way/27791356"
+    },
+    {
+      "id": "node/5097798991",
+      "name": "Библиотека",
+      "type": "restaurant",
+      "lat": 55.6337059,
+      "lon": 37.360295,
+      "address": "Новоорловская улица, 9",
+      "hours": null,
+      "sourceUrl": "https://www.openstreetmap.org/node/5097798991",
+      "sourceIds": [
+        "node/5097798991"
+      ],
+      "verifiedAt": "2026-11-23T18:55:37.720Z",
+      "osmUpdatedAt": "2023-10-22T23:11:39Z",
+      "addressSourceId": "way/523738088"
+    },
+    {
+      "id": "node/3836286950",
+      "name": "Мельница",
+      "type": "restaurant",
+      "lat": 55.6554021,
+      "lon": 37.3527259,
+      "address": "9-я Чоботовская аллея, 1 с1",
+      "hours": null,
+      "sourceUrl": "https://www.openstreetmap.org/node/3836286950",
+      "sourceIds": [
+        "node/3836286950"
+      ],
+      "verifiedAt": "2026-11-23T18:55:37.720Z",
+      "osmUpdatedAt": "2023-09-17T22:47:20Z",
+      "addressSourceId": "way/136815453"
+    },
+    {
+      "id": "way/380283996",
+      "name": "Монастырская выпечка",
+      "type": "cafe",
+      "lat": 55.657452,
+      "lon": 37.3464996,
+      "address": null,
+      "hours": null,
+      "sourceUrl": "https://www.openstreetmap.org/way/380283996",
+      "sourceIds": [
+        "way/380283996"
+      ],
+      "verifiedAt": "2026-11-23T18:55:37.720Z",
+      "osmUpdatedAt": "2023-09-17T22:55:32Z",
+      "addressSourceId": null
+    },
+    {
+      "id": "node/457816057",
+      "name": "Роял",
+      "type": "restaurant",
+      "lat": 55.6371966,
+      "lon": 37.3498964,
+      "address": "Боровское шоссе, 42 к1",
+      "hours": null,
+      "sourceUrl": "https://www.openstreetmap.org/node/457816057",
+      "sourceIds": [
+        "node/457816057"
+      ],
+      "verifiedAt": "2026-11-23T18:55:37.720Z",
+      "osmUpdatedAt": "2023-09-17T22:47:20Z",
+      "addressSourceId": "way/42038863"
+    },
+    {
+      "id": "node/2666425225",
+      "name": "Стамбул",
+      "type": "restaurant",
+      "lat": 55.6376143,
+      "lon": 37.3405063,
+      "address": "улица Скульптора Мухиной, 11",
+      "hours": null,
+      "sourceUrl": "https://www.openstreetmap.org/node/2666425225",
+      "sourceIds": [
+        "node/2666425225"
+      ],
+      "verifiedAt": "2026-11-23T18:55:37.720Z",
+      "osmUpdatedAt": "2023-09-17T22:47:20Z",
+      "addressSourceId": "way/253099584"
+    },
+    {
+      "id": "node/411299606",
+      "name": "Тануки",
+      "type": "restaurant",
+      "lat": 55.6424926,
+      "lon": 37.361208,
+      "address": "Боровское шоссе, 31",
+      "hours": "Fr-Sa 00:00-24:00; Mo-Th,Su 11:00-02:00",
+      "sourceUrl": "https://www.openstreetmap.org/node/411299606",
+      "sourceIds": [
+        "node/411299606"
+      ],
+      "verifiedAt": "2026-11-23T18:55:37.720Z",
+      "osmUpdatedAt": "2023-09-17T22:47:20Z",
+      "addressSourceId": "way/41279193"
+    },
+    {
+      "id": "node/7208373929",
+      "name": "Чайхона Шамс",
+      "type": "cafe",
+      "lat": 55.6356052,
+      "lon": 37.3420869,
+      "address": "улица Федосьино, 4",
+      "hours": null,
+      "sourceUrl": "https://www.openstreetmap.org/node/7208373929",
+      "sourceIds": [
+        "node/7208373929"
+      ],
+      "verifiedAt": "2026-11-23T18:55:37.720Z",
+      "osmUpdatedAt": "2023-09-17T22:55:32Z",
+      "addressSourceId": "way/27791356"
+    },
+    {
+      "id": "node/10655589172",
+      "name": "Max Bakery",
+      "type": "coffee",
+      "lat": 55.6411498,
+      "lon": 37.3488808,
+      "address": "улица Шолохова, 22",
+      "hours": "Mo-Sa 09:00-22:00; Su 09:00-21:00",
+      "sourceUrl": "https://www.openstreetmap.org/node/10655589172",
+      "sourceIds": [
+        "node/10655589172"
+      ],
+      "verifiedAt": "2026-11-23T18:55:37.720Z",
+      "osmUpdatedAt": "2023-11-15T11:38:14Z",
+      "addressSourceId": "way/610222866"
+    },
+    {
+      "id": "node/10655589183",
+      "name": "Max Bakery",
+      "type": "coffee",
+      "lat": 55.6406683,
+      "lon": 37.3652717,
+      "address": "Новопеределкинская улица, 11 кА",
+      "hours": "Mo-Sa 09:00-22:00; Su 09:00-21:00",
+      "sourceUrl": "https://www.openstreetmap.org/node/10655589183",
+      "sourceIds": [
+        "node/10655589183"
+      ],
+      "verifiedAt": "2026-11-23T18:55:37.720Z",
+      "osmUpdatedAt": "2023-11-15T11:38:14Z",
+      "addressSourceId": "way/47272931"
+    }
+  ]
+}
